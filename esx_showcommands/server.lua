@@ -68,6 +68,41 @@ TriggerEvent('es:addCommand', 'showdirty', function(source)
 TriggerClientEvent('esx:showNotification', _source, 'You currently have ~g~$~g~' .. black_money .. ' ~s~dirty money in your wallet~g~ ')
 end, {help = "Check how much dirty money you have"})
 
+TriggerEvent('es:addCommand', 'showsociety', function(source)
+	local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+	
+	if xPlayer.job.grade_name == 'boss' then
+		local society = GetSociety(xPlayer.job.name)
+
+		if society ~= nil then
+			TriggerEvent('esx_addonaccount:getSharedAccount', society.account, function(account)
+				money = account.money
+			end)
+		else
+			money = 0
+		end
+		
+		TriggerClientEvent('esx:showNotification', _source, 'You currently have ~g~$~g~' .. money .. ' ~s~in the society account~g~ ')
+																	
+	else
+
+		TriggerClientEvent('esx:showNotification', _source, '~r~Access not granted!')
+																			
+	end
+end, {help = "Check your society's balance"})
+
+TriggerEvent('esx_society:getSocieties', function(societies) 
+	RegisteredSocieties = societies
+end)
+
+function GetSociety(name)
+  for i=1, #RegisteredSocieties, 1 do
+    if RegisteredSocieties[i].name == name then
+      return RegisteredSocieties[i]
+    end
+  end
+end
 
 
 
