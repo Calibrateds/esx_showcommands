@@ -1,19 +1,12 @@
-PlayerData                = {}
+ESX = nil
+local RegisteredSocieties = {}
 
-ESX                             = nil
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+local function getMoneyFromUser(id_user)
+	local xPlayer = ESX.GetPlayerFromId(id_user)
+	return xPlayer.getMoney()
 
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(10)
-	end
-
-	while ESX.GetPlayerData() == nil do
-		Citizen.Wait(10)
-	end
-
-  	PlayerData = ESX.GetPlayerData()
-end)
+end
 
 local function getMoneyFromUser(id_user)
 	local xPlayer = ESX.GetPlayerFromId(id_user)
