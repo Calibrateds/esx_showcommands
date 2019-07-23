@@ -104,7 +104,7 @@ TriggerEvent('es:addCommand', 'showall', function(source)
                 --TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'inform', text = 'You currently have $' .. black_money .. ' dirty money in your wallet'})
                 Citizen.Wait(1500)
                 TriggerClientEvent('esx:showNotification', _source, 'You currently have ~g~$~g~' .. money .. ' ~s~in the society account~g~ ')
-                --TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You currently have $' .. money .. ' in the society account'})
+                --TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'inform', text = 'You currently have $' .. money .. ' in the society account'})
 																	
 	else
 
